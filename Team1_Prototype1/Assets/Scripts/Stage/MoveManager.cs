@@ -31,20 +31,25 @@ public class MoveManager : MonoBehaviour
     {
         _selectedTile = GameManager.instance.Down_List[num_selected];
         _selectedTile_up = GameManager.instance.Up_List[num_selected];
+        _selectedTile.GetComponent<TileController>().SelectedEffect();
     }
 
     public void MoveTile()
     {
+        _selectedTile.GetComponent<TileController>().EndSelect();
         num_selected++;
         _selectedTile = GameManager.instance.Down_List[num_selected];
         _selectedTile_up = GameManager.instance.Up_List[num_selected];
+        _selectedTile.GetComponent<TileController>().SelectedEffect();
     }
 
     public void CheckTile()
     {
         _selectedTile.GetComponent<SpriteRenderer>().color = Color.cyan;
+        _selectedTile.GetComponent<TileController>().EndSelect();
         num_selected++;
         _selectedTile = GameManager.instance.Down_List[num_selected];
         _selectedTile_up = GameManager.instance.Up_List[num_selected];
+        _selectedTile.GetComponent<TileController>().SelectedEffect();
     }
 }

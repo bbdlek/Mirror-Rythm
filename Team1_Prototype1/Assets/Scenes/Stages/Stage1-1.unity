@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e849a4eb9e5d2542aaa87d9a72fdd9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShaking: 0
 --- !u!1 &447046175
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +305,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
-  m_ScreenMatchMode: 2
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -729,6 +730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Up_List: []
   Down_List: []
+  bpmTime: 0
 --- !u!4 &1076025963
 Transform:
   m_ObjectHideFlags: 0
@@ -755,6 +757,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ddae7f81184f1b4082a4bb4b9f2aa0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tikTime: 0
+  sync: 0.15
   ClickDuration: 1
   _audio: {fileID: 0}
   isSuccess: 0
@@ -775,6 +779,7 @@ MonoBehaviour:
   upside: {fileID: 706215161}
   _down_tile: {fileID: 6814970958367485560, guid: 7c6f55d3aa787484fbadd32c5d053415, type: 3}
   downside: {fileID: 1975768820}
+  isReady: 0
 --- !u!114 &1076025966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,6 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedTile: {fileID: 0}
+  _selectedTile_up: {fileID: 0}
 --- !u!1 &1734700580
 GameObject:
   m_ObjectHideFlags: 0

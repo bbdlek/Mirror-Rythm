@@ -17,10 +17,11 @@ public class GameManager : MonoBehaviour
     
     public List<GameObject> Up_List;
     public List<GameObject> Down_List;
-    
+
+    public float bpmTime;
+
     private void Awake()
     {
         instance = this;
     }
-
 }

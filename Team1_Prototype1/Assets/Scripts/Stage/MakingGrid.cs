@@ -19,6 +19,8 @@ public class MakingGrid : MonoBehaviour
 
     private MoveManager _moveManager;
 
+    public bool isReady = false;
+
     private void Start()
     {
         NbyNGridUp(6, 6);
@@ -58,6 +60,7 @@ public class MakingGrid : MonoBehaviour
         upside.transform.localScale = new Vector3(scale, scale, scale);
         //Debug.Log(scale);
         upside.transform.position = new Vector3(scale * (width / 2 - 0.5f) * -1, 0, 0);
+        isReady = true;
     }
     
     private GameObject SelectedTile()

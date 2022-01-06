@@ -11,8 +11,9 @@ public class Metronome : MonoBehaviour
     private float musicBPM = 83f;
     private float stdBPM = 60f;
 
-    private float tikTime = 0;
+    public float tikTime = 0;
     private float nextTime = 0;
+    public float sync = 0;
 
     private float offsetForSample;
     private float nextSample;
@@ -29,20 +30,26 @@ public class Metronome : MonoBehaviour
 
     [SerializeField] private bool isSuccess = false;
 
+    //private bool isMusic = false;
+
     private void Start()
     {
         _moveManager = GetComponent<MoveManager>();
         _audio = GetComponent<AudioSource>();
         _audio.Play();
-        
+
         tikTime = stdBPM / musicBPM;
+        GameManager.instance.bpmTime = tikTime;
         ClickDuration = tikTime;
+
+        nextTime += sync;
     }
 
     private void Update()
     {
+
         CheckClick();
-  
+
 
         nextTime += Time.deltaTime;
 
@@ -50,7 +57,8 @@ public class Metronome : MonoBehaviour
         {
             StartCoroutine(Playtik(tikTime));
             nextTime = 0;
-        }
+        }            
+
     }
 
     IEnumerator Playtik(float tikTime)
@@ -61,7 +69,7 @@ public class Metronome : MonoBehaviour
 
     public void CheckAccuracy()
     {
-        if (nextTime < tikTime * 0.15f || nextTime > tikTime * 0.85f)
+        if (nextTime < tikTime * 0.2f || nextTime > tikTime * 0.8f)
         {
             Debug.Log("Success");
             isSuccess = true;
