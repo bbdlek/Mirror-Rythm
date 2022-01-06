@@ -69,7 +69,7 @@ public class Metronome : MonoBehaviour
 
     public void CheckAccuracy()
     {
-        if (nextTime < tikTime * 0.2f || nextTime > tikTime * 0.8f)
+        if (nextTime < tikTime * 0.3f || nextTime > tikTime * 0.7f)
         {
             Debug.Log("Success");
             isSuccess = true;
