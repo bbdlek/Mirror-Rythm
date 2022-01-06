@@ -5,10 +5,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager instance = null;
 
+    public static GameManager Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+    
+    public List<GameObject> Up_List;
+    public List<GameObject> Down_List;
+    
     private void Awake()
     {
         instance = this;
     }
+
 }

@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
         Transform _downSide = GameObject.Find("DownSide").transform;
         foreach (Transform child in _downSide)
         {
-            child.GetComponent<TileController>().isSelected = false;
+            //child.GetComponent<TileController>().isSelected = false;
             Tiles.Add(child.gameObject);
         }
     }
@@ -38,12 +38,12 @@ public class PlayerController : MonoBehaviour
 
     public void FlashTile()
     {
-        _selectedTile.GetComponent<TileController>().Flash();
+        //_selectedTile.GetComponent<TileController>().Flash();
     }
 
     public void FillTile()
     {
-        _selectedTile.GetComponent<TileController>().Filled();
+        //_selectedTile.GetComponent<TileController>().Filled();
         NextTile();
     }
 }

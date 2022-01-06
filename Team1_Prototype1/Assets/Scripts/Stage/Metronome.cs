@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,23 +19,30 @@ public class Metronome : MonoBehaviour
 
     //public Text _AccuracyTxt;
 
-    //public float ClickDuration = 1f;
-    //private bool clicking = false;
-    //private float totalDownTime = 0;
+    public float ClickDuration = 1f;
+    private bool clicking = false;
+    private float totalDownTime = 0;
 
     [SerializeField] private AudioSource _audio;
 
+    private MoveManager _moveManager;
+
+    [SerializeField] private bool isSuccess = false;
+
     private void Start()
     {
+        _moveManager = GetComponent<MoveManager>();
         _audio = GetComponent<AudioSource>();
         _audio.Play();
+        
+        tikTime = stdBPM / musicBPM;
+        ClickDuration = tikTime;
     }
 
     private void Update()
     {
-        //CheckClick();
-
-        tikTime = stdBPM / musicBPM;
+        CheckClick();
+  
 
         nextTime += Time.deltaTime;
 
@@ -51,55 +59,45 @@ public class Metronome : MonoBehaviour
         yield return new WaitForSeconds(tikTime);
     }
 
-    /*private void CheckAccuracy()
+    public void CheckAccuracy()
     {
-        float accuracy = 0;
-            if (nextTime > 0.5f)
-                accuracy = nextTime * 100;
-            else accuracy = (1f - nextTime) * 100;
-
-            if (accuracy > 95f)
-            {
-                _AccuracyTxt.text = "Perfect!";
-                _playerController.NextTile();
-            }
-            else if (accuracy > 80f)
-            {
-                _AccuracyTxt.text = "Great!";
-                _playerController.NextTile();
-            }
-            else if (accuracy > 70f)
-            {
-                _AccuracyTxt.text = "Good!";
-                _playerController.NextTile();
-            }
-            else
-                _AccuracyTxt.text = "Bad!";
-            //Debug.LogWarning(accuracy);
+        if (nextTime < tikTime * 0.15f || nextTime > tikTime * 0.85f)
+        {
+            Debug.Log("Success");
+            isSuccess = true;
+        }
+        else
+        {
+            Debug.Log("Failed");
+            Camera.main.GetComponent<CameraController>().ShakeCam();
+            GetComponent<MoveManager>()._selectedTile.GetComponent<TileController>().ShakeTile();
+            GetComponent<MoveManager>()._selectedTile_up.GetComponent<TileController>().ShakeTile();
+            isSuccess = false;
+        }
     }
 
     private void CheckClick()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            CheckAccuracy();
             totalDownTime = 0;
             clicking = true;
         }
-        if (clicking && Input.GetMouseButton(0))
+        if (clicking && Input.GetMouseButton(0) && isSuccess)
         {
             totalDownTime += Time.deltaTime;
 
             if (totalDownTime >= ClickDuration)
             {
-                Debug.Log("Long click");
-                _playerController.FillTile();
+                _moveManager.CheckTile();
                 clicking = false;
             }
         }
-        if (clicking && Input.GetMouseButtonUp(0))
+        if (clicking && Input.GetMouseButtonUp(0) && isSuccess)
         {
-            CheckAccuracy();
+            _moveManager.MoveTile();
             clicking = false;
         }
-    }*/
+    }
 }

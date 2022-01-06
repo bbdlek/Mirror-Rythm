@@ -11,16 +11,20 @@ public class MakingGrid : MonoBehaviour
 
     [SerializeField] private GameObject upside;
 
-    [SerializeField] private List<GameObject> Up_List;
+    //[SerializeField] private List<GameObject> Up_List;
     
     [SerializeField] private GameObject _down_tile;
     [SerializeField] private GameObject downside;
-    [SerializeField] private List<GameObject> Down_List;
+    //[SerializeField] private List<GameObject> Down_List;
+
+    private MoveManager _moveManager;
 
     private void Start()
     {
-        NbyNGridUp(10, 10);
-        NbyNGridDown(10, 10);
+        NbyNGridUp(6, 6);
+        NbyNGridDown(6, 6);
+        _moveManager = GetComponent<MoveManager>();
+        _moveManager.InitiateList();
     }
 
     public void NbyNGridUp(int width, int height)
@@ -34,7 +38,7 @@ public class MakingGrid : MonoBehaviour
                     GameObject tile;
                     tile = Instantiate(SelectedTile(), upside.transform);
                     tile.transform.position = tile.transform.position + new Vector3(0, j) + new Vector3(i, 0);
-                    Up_List.Add(tile);
+                    GameManager.instance.Up_List.Add(tile);
                 }                
             }
             else if (i % 2 == 1)
@@ -44,7 +48,7 @@ public class MakingGrid : MonoBehaviour
                     GameObject tile;
                     tile = Instantiate(SelectedTile(), upside.transform);
                     tile.transform.position = tile.transform.position + new Vector3(0, j - 1) + new Vector3(i, 0);
-                    Up_List.Add(tile);
+                    GameManager.instance.Up_List.Add(tile);
                 }  
             }
             
@@ -80,7 +84,7 @@ public class MakingGrid : MonoBehaviour
                     GameObject tile;
                     tile = Instantiate(_down_tile, downside.transform);
                     tile.transform.position = tile.transform.position - new Vector3(0, j) + new Vector3(i, 0);
-                    Down_List.Add(tile);
+                    GameManager.instance.Down_List.Add(tile);
                 }                
             }
             else if (i % 2 == 1)
@@ -90,7 +94,7 @@ public class MakingGrid : MonoBehaviour
                     GameObject tile;
                     tile = Instantiate(_down_tile, downside.transform);
                     tile.transform.position = tile.transform.position - new Vector3(0, j - 1) + new Vector3(i, 0);
-                    Down_List.Add(tile);
+                    GameManager.instance.Down_List.Add(tile);
                 }  
             }
             
