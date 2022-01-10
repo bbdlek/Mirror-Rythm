@@ -36,20 +36,38 @@ public class MoveManager : MonoBehaviour
 
     public void MoveTile()
     {
-        _selectedTile.GetComponent<TileController>().EndSelect();
-        num_selected++;
-        _selectedTile = GameManager.instance.Down_List[num_selected];
-        _selectedTile_up = GameManager.instance.Up_List[num_selected];
-        _selectedTile.GetComponent<TileController>().SelectedEffect();
+        if (GameManager.instance.Up_List[num_selected].CompareTag("YesTile"))
+        {
+            Camera.main.GetComponent<CameraController>().ShakeCam();
+            GetComponent<MoveManager>()._selectedTile.GetComponent<TileController>().ShakeTile();
+            GetComponent<MoveManager>()._selectedTile_up.GetComponent<TileController>().ShakeTile();
+        }
+        else if(GameManager.instance.Up_List[num_selected].CompareTag("NoTile"))
+        {
+            _selectedTile.GetComponent<TileController>().EndSelect();
+            num_selected++;
+            _selectedTile = GameManager.instance.Down_List[num_selected];
+            _selectedTile_up = GameManager.instance.Up_List[num_selected];
+            _selectedTile.GetComponent<TileController>().SelectedEffect();
+        }
     }
 
     public void CheckTile()
     {
-        _selectedTile.GetComponent<SpriteRenderer>().color = Color.cyan;
-        _selectedTile.GetComponent<TileController>().EndSelect();
-        num_selected++;
-        _selectedTile = GameManager.instance.Down_List[num_selected];
-        _selectedTile_up = GameManager.instance.Up_List[num_selected];
-        _selectedTile.GetComponent<TileController>().SelectedEffect();
+        if (GameManager.instance.Up_List[num_selected].CompareTag("YesTile"))
+        {
+            _selectedTile.GetComponent<SpriteRenderer>().color = Color.cyan;
+            _selectedTile.GetComponent<TileController>().EndSelect();
+            num_selected++;
+            _selectedTile = GameManager.instance.Down_List[num_selected];
+            _selectedTile_up = GameManager.instance.Up_List[num_selected];
+            _selectedTile.GetComponent<TileController>().SelectedEffect();
+        }
+        else if(GameManager.instance.Up_List[num_selected].CompareTag("NoTile"))
+        {
+            Camera.main.GetComponent<CameraController>().ShakeCam();
+            GetComponent<MoveManager>()._selectedTile.GetComponent<TileController>().ShakeTile();
+            GetComponent<MoveManager>()._selectedTile_up.GetComponent<TileController>().ShakeTile();
+        }
     }
 }
